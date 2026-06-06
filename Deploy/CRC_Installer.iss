@@ -40,6 +40,7 @@ DefaultGroupName={#MyAppName}
 UsePreviousAppDir=no
 
 SetupIconFile={#MySetupIconFile}
+LicenseFile=Assets\License.txt
 UninstallDisplayIcon={app}\{#MyAppExeName}
 
 OutputDir=Output
