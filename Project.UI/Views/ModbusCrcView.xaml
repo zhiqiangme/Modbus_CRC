@@ -293,7 +293,7 @@
                                      FontSize="22"
                                      IsReadOnly="True"
                                      TextWrapping="Wrap"
-                                     Text="{Binding RawFrameText}" />
+                                     Text="{Binding RawFrameText, Mode=OneWay}" />
                         </StackPanel>
                     </Border>
 
