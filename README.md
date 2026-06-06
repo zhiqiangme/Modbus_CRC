@@ -45,6 +45,16 @@ dotnet build Project.slnx -c Release -p:Platform=x64
 
 用途：还原依赖并编译 Release x64 版本。
 
+## 协议层验证
+
+在 `D:\Project\Modbus_CRC\Win_x64` 目录执行：
+
+```powershell
+dotnet run --project Project.ProtocolChecks\Project.ProtocolChecks.csproj -c Release -p:Platform=x64
+```
+
+用途：在没有真实 Modbus 从站设备时，验证功能码模板、CRC、请求帧导入纠错和响应帧解析。
+
 ## 发布程序文件
 
 在 `D:\Project\Modbus_CRC\Win_x64` 目录执行：
