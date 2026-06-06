@@ -7,7 +7,7 @@
 ; -----------------------------
 #define MyFileName           "Modbus_CRC"
 #define MyAppName            "Modbus原始帧生成器"
-#define MyAppVersion         "1.2.0"
+#define MyAppVersion         "1.0.0"
 #define MyAppPublisher       "zhiqiangme"
 #define MyAppURL             "https://github.com/zhiqiangme"
 #define MyAppId              "{{89BD572F-9FA5-4268-9B67-D887EA2890D9}}"
