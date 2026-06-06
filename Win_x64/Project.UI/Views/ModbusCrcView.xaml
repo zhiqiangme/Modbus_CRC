@@ -4,344 +4,604 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             d:DesignHeight="676"
-             d:DesignWidth="1166">
-    <Grid Margin="24">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="16" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+             d:DesignHeight="860"
+             d:DesignWidth="1240">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="16" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="16" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <Border Padding="24"
-                CornerRadius="18"
-                Background="#0F172A">
-            <Grid>
+            <Border Padding="24"
+                    CornerRadius="18"
+                    Background="#0F172A">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <TextBlock FontSize="14"
+                                   Foreground="#93C5FD"
+                                   FontWeight="SemiBold"
+                                   Text="Modbus RTU 调试" />
+                        <TextBlock Margin="0,10,0,0"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   Text="原始帧生成、发送与解析" />
+                        <TextBlock Margin="0,10,0,0"
+                                   FontSize="14"
+                                   Foreground="#CBD5E1"
+                                   Text="按功能码生成 RTU 请求帧，支持复制、串口发送和响应解析。" />
+                    </StackPanel>
+
+                    <Border Grid.Column="1"
+                            Padding="16,10"
+                            CornerRadius="12"
+                            Background="#1E293B">
+                        <StackPanel>
+                            <TextBlock FontSize="12"
+                                       Foreground="#94A3B8"
+                                       Text="当前状态" />
+                            <TextBlock Margin="0,4,0,0"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="#F8FAFC"
+                                       Text="{Binding HeaderStatusText}" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1.03*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="0.97*" />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel>
-                    <TextBlock FontSize="14"
-                               Foreground="#93C5FD"
-                               FontWeight="SemiBold"
-                               Text="Modbus RTU CRC" />
-                    <TextBlock Margin="0,10,0,0"
-                               FontSize="28"
-                               FontWeight="Bold"
-                               Foreground="White"
-                               Text="远程维护原始帧生成器" />
-                    <TextBlock Margin="0,10,0,0"
-                               FontSize="14"
-                               Foreground="#CBD5E1"
-                               Text="输入从站地址、功能码、寄存器和数据，软件会自动计算 CRC16、生成原始帧并复制到剪贴板。" />
-                </StackPanel>
-
-                <Border Grid.Column="1"
-                        Padding="16,10"
-                        CornerRadius="12"
-                        Background="#1E293B">
-                    <StackPanel>
-                        <TextBlock FontSize="12"
-                                   Foreground="#94A3B8"
-                                   Text="当前状态" />
-                        <TextBlock Margin="0,4,0,0"
-                                   FontSize="18"
-                                   FontWeight="SemiBold"
-                                   Foreground="#F8FAFC"
-                                   Text="{Binding HeaderStatusText}" />
-                    </StackPanel>
-                </Border>
-            </Grid>
-        </Border>
-
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.05*" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="0.95*" />
-            </Grid.ColumnDefinitions>
-
-            <Border Grid.Column="0"
-                    Padding="24"
-                    Style="{StaticResource PanelBorderStyle}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
+                <Border Grid.Column="0"
+                        Padding="24"
+                        Style="{StaticResource PanelBorderStyle}">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="16" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="16" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="16" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                        <TextBlock VerticalAlignment="Center"
-                                   FontSize="22"
-                                   FontWeight="Bold"
-                                   Text="输入参数" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="16" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="2">
-                            <TextBox Height="42"
-                                     Padding="12,0,96,0"
-                                     FontFamily="Consolas"
-                                     FontSize="18"
-                                     VerticalContentAlignment="Center"
-                                     ToolTip="粘贴完整原始帧后按 Enter 导入；右键会从剪贴板导入、纠正 CRC 并复制正确结果"
-                                     Text="{Binding FrameImportText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     KeyDown="FrameImportTextBox_OnKeyDown"
-                                     PreviewMouseRightButtonUp="FrameImportTextBox_OnPreviewMouseRightButtonUp" />
-                            <TextBlock Margin="0,0,12,0"
-                                       HorizontalAlignment="Right"
-                                       VerticalAlignment="Center"
-                                       FontSize="14"
-                                       FontWeight="SemiBold"
-                                       Text="{Binding FrameImportStatusText}">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
+                            <TextBlock VerticalAlignment="Center"
+                                       FontSize="22"
+                                       FontWeight="Bold"
+                                       Text="请求生成" />
+
+                            <Grid Grid.Column="2">
+                                <TextBox Height="42"
+                                         Padding="12,0,96,0"
+                                         FontFamily="Consolas"
+                                         FontSize="18"
+                                         VerticalContentAlignment="Center"
+                                         ToolTip="粘贴完整请求帧后按 Enter 导入；右键从剪贴板导入并纠正 CRC"
+                                         Text="{Binding FrameImportText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         KeyDown="FrameImportTextBox_OnKeyDown"
+                                         PreviewMouseRightButtonUp="FrameImportTextBox_OnPreviewMouseRightButtonUp" />
+                                <TextBlock Margin="0,0,12,0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Text="{Binding FrameImportStatusText}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Setter Property="Foreground" Value="#0F766E" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsFrameImportStatusVisible}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsFrameImportStatusWarning}" Value="True">
+                                                    <Setter Property="Foreground" Value="#CD5C5C" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="18" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="16" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="16" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="16" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel>
+                                <TextBlock Text="从站地址" Style="{StaticResource LabelTextStyle}" />
+                                <Grid Margin="0,8,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="54" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Height="42"
+                                            Padding="0"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            FontFamily="Consolas"
+                                            FontSize="18"
+                                            FontWeight="SemiBold"
+                                            Content="{Binding SlaveAddressBaseText}"
+                                            Command="{Binding ToggleSlaveAddressBaseCommand}" />
+                                    <TextBox Grid.Column="1"
+                                             Height="42"
+                                             FontSize="18"
+                                             VerticalContentAlignment="Center"
+                                             ToolTip="1 字节，例如 0A"
+                                             Text="{Binding SlaveAddressText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="功能码" Style="{StaticResource LabelTextStyle}" />
+                                <ComboBox Height="42"
+                                          Margin="0,8,0,0"
+                                          FontSize="16"
+                                          DisplayMemberPath="DisplayName"
+                                          ItemsSource="{Binding FunctionOptions}"
+                                          SelectedItem="{Binding SelectedFunctionOption, Mode=TwoWay}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2">
+                                <TextBlock Text="{Binding AddressFieldLabel}" Style="{StaticResource LabelTextStyle}" />
+                                <Grid Margin="0,8,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="54" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Height="42"
+                                            Padding="0"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            FontFamily="Consolas"
+                                            FontSize="18"
+                                            FontWeight="SemiBold"
+                                            Content="{Binding RegisterAddressBaseText}"
+                                            Command="{Binding ToggleRegisterAddressBaseCommand}" />
+                                    <TextBox Grid.Column="1"
+                                             Height="42"
+                                             FontSize="18"
+                                             VerticalContentAlignment="Center"
+                                             ToolTip="2 字节，例如 0030"
+                                             Text="{Binding RegisterAddressText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2"
+                                        Grid.Column="2">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
                                         <Setter Property="Visibility" Value="Collapsed" />
-                                        <Setter Property="Foreground" Value="#0F766E" />
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsFrameImportStatusVisible}" Value="True">
+                                            <DataTrigger Binding="{Binding IsQuantityFieldVisible}" Value="True">
                                                 <Setter Property="Visibility" Value="Visible" />
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsFrameImportStatusWarning}" Value="True">
-                                                <Setter Property="Foreground" Value="#CD5C5C" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
+                                </StackPanel.Style>
+                                <TextBlock Text="{Binding QuantityFieldLabel}" Style="{StaticResource LabelTextStyle}" />
+                                <Grid Margin="0,8,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="54" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Height="42"
+                                            Padding="0"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            FontFamily="Consolas"
+                                            FontSize="18"
+                                            FontWeight="SemiBold"
+                                            Content="{Binding QuantityBaseText}"
+                                            Command="{Binding ToggleQuantityBaseCommand}" />
+                                    <TextBox Grid.Column="1"
+                                             Height="42"
+                                             FontSize="18"
+                                             VerticalContentAlignment="Center"
+                                             ToolTip="{Binding QuantityFieldHint}"
+                                             Text="{Binding QuantityText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="4"
+                                        Grid.Column="2">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsDataFieldVisible}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <TextBlock Text="{Binding DataFieldLabel}" Style="{StaticResource LabelTextStyle}" />
+                                <Grid Margin="0,8,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="54" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Height="42"
+                                            Padding="0"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            FontFamily="Consolas"
+                                            FontSize="18"
+                                            FontWeight="SemiBold"
+                                            Content="{Binding DataBaseText}"
+                                            Command="{Binding ToggleDataBaseCommand}" />
+                                    <TextBox Grid.Column="1"
+                                             Height="42"
+                                             FontSize="18"
+                                             VerticalContentAlignment="Center"
+                                             ToolTip="{Binding DataFieldHint}"
+                                             Text="{Binding DataText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="4"
+                                        Grid.ColumnSpan="3">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsValuesFieldVisible}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <TextBlock Text="{Binding ValuesFieldLabel}" Style="{StaticResource LabelTextStyle}" />
+                                <TextBox Height="78"
+                                         Margin="0,8,0,0"
+                                         Padding="10,8"
+                                         FontFamily="Consolas"
+                                         FontSize="17"
+                                         AcceptsReturn="True"
+                                         TextWrapping="Wrap"
+                                         VerticalContentAlignment="Top"
+                                         ToolTip="{Binding ValuesFieldHint}"
+                                         Text="{Binding ValuesText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBlock Margin="0,6,0,0"
+                                           Style="{StaticResource HintTextStyle}"
+                                           Text="{Binding ValuesFieldHint}" />
+                            </StackPanel>
+
+                            <TextBlock Grid.Row="6"
+                                       Grid.ColumnSpan="3"
+                                       Style="{StaticResource HintTextStyle}"
+                                       Text="支持功能码 01/02/03/04/05/06/0F/10，切换后会按请求类型显示相关字段。" />
                         </Grid>
+
+                        <StackPanel Grid.Row="4"
+                                    Orientation="Horizontal">
+                            <Button Width="150"
+                                    Height="44"
+                                    Content="生成并复制"
+                                    Command="{Binding GenerateCommand}" />
+                            <Button Width="112"
+                                    Height="44"
+                                    Margin="12,0,0,0"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Content="填入示例"
+                                    Command="{Binding FillExampleCommand}" />
+                            <Button Width="112"
+                                    Height="44"
+                                    Margin="12,0,0,0"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Content="回收站"
+                                    Click="RecycleBinButton_OnClick" />
+                        </StackPanel>
                     </Grid>
+                </Border>
 
-                    <UniformGrid Grid.Row="2"
-                                 Columns="2"
-                                 Rows="2">
-                        <StackPanel Margin="0,0,12,16">
-                            <TextBlock Text="从站地址" Style="{StaticResource LabelTextStyle}" />
-                            <Grid Margin="0,8,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="54" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Button Height="42"
-                                        Padding="0"
-                                        Style="{StaticResource SecondaryButtonStyle}"
-                                        FontFamily="Consolas"
-                                        FontSize="18"
-                                        FontWeight="SemiBold"
-                                        Content="{Binding SlaveAddressBaseText}"
-                                        Command="{Binding ToggleSlaveAddressBaseCommand}" />
-                                <TextBox Grid.Column="1"
-                                         Height="42"
-                                         FontSize="18"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="1 字节，例如 0A"
-                                         Text="{Binding SlaveAddressText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                            <TextBlock Margin="0,6,0,0"
-                                       Style="{StaticResource HintTextStyle}"
-                                       Text="1 字节，可切换 HEX / DEC 输入" />
-                        </StackPanel>
-
-                        <StackPanel Margin="12,0,0,16">
-                            <TextBlock Text="功能码" Style="{StaticResource LabelTextStyle}" />
-                            <Grid Margin="0,8,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="54" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Button Height="42"
-                                        Padding="0"
-                                        Style="{StaticResource SecondaryButtonStyle}"
-                                        FontFamily="Consolas"
-                                        FontSize="18"
-                                        FontWeight="SemiBold"
-                                        Content="{Binding FunctionCodeBaseText}"
-                                        Command="{Binding ToggleFunctionCodeBaseCommand}" />
-                                <TextBox Grid.Column="1"
-                                         Height="42"
-                                         FontSize="18"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="1 字节，例如 06"
-                                         Text="{Binding FunctionCodeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                            <TextBlock Margin="0,6,0,0"
-                                       Style="{StaticResource HintTextStyle}"
-                                       Text="1 字节，例如 03 / 06 / 10" />
-                        </StackPanel>
-
-                        <StackPanel Margin="0,0,12,0">
-                            <TextBlock Text="寄存器地址" Style="{StaticResource LabelTextStyle}" />
-                            <Grid Margin="0,8,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="54" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Button Height="42"
-                                        Padding="0"
-                                        Style="{StaticResource SecondaryButtonStyle}"
-                                        FontFamily="Consolas"
-                                        FontSize="18"
-                                        FontWeight="SemiBold"
-                                        Content="{Binding RegisterAddressBaseText}"
-                                        Command="{Binding ToggleRegisterAddressBaseCommand}" />
-                                <TextBox Grid.Column="1"
-                                         Height="42"
-                                         FontSize="18"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="2 字节，例如 0030"
-                                         Text="{Binding RegisterAddressText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                            <TextBlock Margin="0,6,0,0"
-                                       Style="{StaticResource HintTextStyle}"
-                                       Text="2 字节，高字节在前" />
-                        </StackPanel>
-
-                        <StackPanel Margin="12,0,0,0">
-                            <TextBlock Text="数据" Style="{StaticResource LabelTextStyle}" />
-                            <Grid Margin="0,8,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="54" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Button Height="42"
-                                        Padding="0"
-                                        Style="{StaticResource SecondaryButtonStyle}"
-                                        FontFamily="Consolas"
-                                        FontSize="18"
-                                        FontWeight="SemiBold"
-                                        Content="{Binding DataBaseText}"
-                                        Command="{Binding ToggleDataBaseCommand}" />
-                                <TextBox Grid.Column="1"
-                                         Height="42"
-                                         FontSize="18"
-                                         VerticalContentAlignment="Center"
-                                         ToolTip="2 字节，例如 A55A"
-                                         Text="{Binding DataText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                            <TextBlock Margin="0,6,0,0"
-                                       Style="{StaticResource HintTextStyle}"
-                                       Text="2 字节，按寄存器写入值" />
-                        </StackPanel>
-                    </UniformGrid>
-
-                    <StackPanel Grid.Row="4"
-                                Orientation="Horizontal">
-                        <Button Width="160"
-                                Height="44"
-                                Content="生成并复制"
-                                Command="{Binding GenerateCommand}" />
-                        <Button Width="120"
-                                Height="44"
-                                Margin="12,0,0,0"
-                                Style="{StaticResource SecondaryButtonStyle}"
-                                Content="填入示例"
-                                Command="{Binding FillExampleCommand}" />
-                        <Button Width="120"
-                                Height="44"
-                                Margin="12,0,0,0"
-                                Style="{StaticResource SecondaryButtonStyle}"
-                                Content="回收站"
-                                Click="RecycleBinButton_OnClick" />
-                        <TextBlock Margin="16,10,0,0"
-                                   VerticalAlignment="Center"
-                                   Style="{StaticResource HintTextStyle}"
-                                   Text="示例：10 / 06 / 0030 / 42330" />
-                    </StackPanel>
-                </Grid>
-            </Border>
-
-            <Border Grid.Column="2"
-                    Padding="24"
-                    Style="{StaticResource PanelBorderStyle}">
-                <Grid>
+                <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="16" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="16" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock FontSize="22"
-                               FontWeight="Bold"
-                               Text="生成结果" />
+                    <Border Padding="24"
+                            Style="{StaticResource PanelBorderStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="12" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="12" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="12" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock FontSize="22"
+                                       FontWeight="Bold"
+                                       Text="生成结果" />
+
+                            <Border Grid.Row="2"
+                                    Padding="16"
+                                    CornerRadius="14"
+                                    Background="#0F172A">
+                                <StackPanel>
+                                    <TextBlock FontSize="12"
+                                               Foreground="#93C5FD"
+                                               Text="原始帧" />
+                                    <TextBox Margin="0,8,0,0"
+                                             Height="72"
+                                             Padding="0"
+                                             Background="#0F172A"
+                                             Foreground="White"
+                                             BorderThickness="0"
+                                             FontFamily="Consolas"
+                                             FontSize="21"
+                                             IsReadOnly="True"
+                                             TextWrapping="Wrap"
+                                             VerticalContentAlignment="Top"
+                                             Text="{Binding RawFrameText, Mode=OneWay}" />
+                                </StackPanel>
+                            </Border>
+
+                            <UniformGrid Grid.Row="4"
+                                         Columns="2">
+                                <Border Margin="0,0,8,0"
+                                        Padding="14"
+                                        Style="{StaticResource SurfaceBorderStyle}">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource HintTextStyle}"
+                                                   Text="CRC16" />
+                                        <TextBlock Margin="0,6,0,0"
+                                                   FontFamily="Consolas"
+                                                   FontSize="23"
+                                                   FontWeight="SemiBold"
+                                                   Text="{Binding CrcText}" />
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Margin="8,0,0,0"
+                                        Padding="14"
+                                        Style="{StaticResource SurfaceBorderStyle}">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource HintTextStyle}"
+                                                   Text="复制状态" />
+                                        <TextBlock Margin="0,6,0,0"
+                                                   FontSize="19"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="#0F766E"
+                                                   Text="{Binding CopyStatusText}" />
+                                    </StackPanel>
+                                </Border>
+                            </UniformGrid>
+
+                            <Border Grid.Row="6"
+                                    Padding="14"
+                                    Style="{StaticResource SurfaceBorderStyle}">
+                                <TextBlock Style="{StaticResource HintTextStyle}"
+                                           TextWrapping="Wrap"
+                                           Text="{Binding NextStepText}" />
+                            </Border>
+                        </Grid>
+                    </Border>
 
                     <Border Grid.Row="2"
-                            Padding="16"
-                            CornerRadius="14"
-                            Background="#0F172A">
-                        <StackPanel>
-                            <TextBlock FontSize="12"
-                                       Foreground="#93C5FD"
-                                       Text="原始帧" />
-                            <TextBox Margin="0,8,0,0"
-                                     Background="#0F172A"
-                                     Foreground="White"
-                                     BorderThickness="0"
-                                     FontFamily="Consolas"
-                                     FontSize="22"
-                                     IsReadOnly="True"
-                                     TextWrapping="Wrap"
-                                     Text="{Binding RawFrameText, Mode=OneWay}" />
-                        </StackPanel>
+                            Padding="24"
+                            Style="{StaticResource PanelBorderStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="14" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="14" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="22"
+                                           FontWeight="Bold"
+                                           Text="串口发送" />
+                                <TextBlock Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           Style="{StaticResource HintTextStyle}"
+                                           Text="{Binding SerialStatusText}" />
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.05*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="0.78*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="0.55*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="10" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <ComboBox Height="38"
+                                          ItemsSource="{Binding SerialPortNames}"
+                                          SelectedItem="{Binding SelectedSerialPortName, Mode=TwoWay}" />
+                                <TextBox Grid.Column="2"
+                                         Height="38"
+                                         Text="{Binding BaudRateText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox Grid.Column="4"
+                                         Height="38"
+                                         Text="{Binding DataBitsText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                                <ComboBox Grid.Row="2"
+                                          Height="38"
+                                          ItemsSource="{Binding ParityOptions}"
+                                          SelectedItem="{Binding SelectedParityOption, Mode=TwoWay}" />
+                                <ComboBox Grid.Row="2"
+                                          Grid.Column="2"
+                                          Height="38"
+                                          ItemsSource="{Binding StopBitsOptions}"
+                                          SelectedItem="{Binding SelectedStopBitsOption, Mode=TwoWay}" />
+                                <TextBox Grid.Row="2"
+                                         Grid.Column="4"
+                                         Height="38"
+                                         Text="{Binding SerialTimeoutText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </Grid>
+
+                            <StackPanel Grid.Row="4"
+                                        Orientation="Horizontal">
+                                <Button Width="130"
+                                        Height="42"
+                                        Content="发送"
+                                        Command="{Binding SendCurrentFrameCommand}" />
+                                <Button Width="130"
+                                        Height="42"
+                                        Margin="12,0,0,0"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Content="刷新串口"
+                                        Command="{Binding RefreshSerialPortsCommand}" />
+                                <TextBlock Margin="14,9,0,0"
+                                           Style="{StaticResource HintTextStyle}"
+                                           Text="端口 / 波特率 / 数据位 / 校验 / 停止位 / 超时 ms" />
+                            </StackPanel>
+                        </Grid>
                     </Border>
 
-                    <UniformGrid Grid.Row="4"
-                                 Columns="2">
-                        <Border Margin="0,0,8,0"
-                                Padding="14"
-                                Style="{StaticResource SurfaceBorderStyle}">
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource HintTextStyle}"
-                                           Text="CRC16" />
-                                <TextBlock Margin="0,6,0,0"
-                                           FontFamily="Consolas"
-                                           FontSize="24"
-                                           FontWeight="SemiBold"
-                                           Text="{Binding CrcText}" />
-                            </StackPanel>
-                        </Border>
+                    <Border Grid.Row="4"
+                            Padding="24"
+                            Style="{StaticResource PanelBorderStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="12" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="12" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                        <Border Margin="8,0,0,0"
-                                Padding="14"
-                                Style="{StaticResource SurfaceBorderStyle}">
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource HintTextStyle}"
-                                           Text="复制状态" />
-                                <TextBlock Margin="0,6,0,0"
-                                           FontSize="20"
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="22"
+                                           FontWeight="Bold"
+                                           Text="响应解析" />
+                                <TextBlock Grid.Column="1"
+                                           VerticalAlignment="Center"
                                            FontWeight="SemiBold"
                                            Foreground="#0F766E"
-                                           Text="{Binding CopyStatusText}" />
-                            </StackPanel>
-                        </Border>
-                    </UniformGrid>
+                                           Text="{Binding ResponseCrcStatusText}" />
+                            </Grid>
 
-                    <Border Grid.Row="6"
-                            Padding="16"
-                            Style="{StaticResource SurfaceBorderStyle}">
-                        <StackPanel>
-                            <TextBlock FontWeight="SemiBold"
-                                       Text="下一步" />
-                            <TextBlock Margin="0,10,0,0"
-                                       Style="{StaticResource HintTextStyle}"
-                                       TextWrapping="Wrap"
-                                       Text="{Binding NextStepText}" />
-                        </StackPanel>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="12" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Height="42"
+                                         FontFamily="Consolas"
+                                         FontSize="17"
+                                         Text="{Binding ResponseImportText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <Button Grid.Column="2"
+                                        Width="96"
+                                        Height="42"
+                                        Content="解析"
+                                        Command="{Binding ParseResponseCommand}" />
+                            </Grid>
+
+                            <Border Grid.Row="4"
+                                    Padding="14"
+                                    Style="{StaticResource SurfaceBorderStyle}">
+                                <StackPanel>
+                                    <TextBlock FontSize="17"
+                                               FontWeight="SemiBold"
+                                               Text="{Binding ResponseSummaryText}" />
+                                    <TextBox Margin="0,8,0,0"
+                                             Height="110"
+                                             Padding="8"
+                                             FontFamily="Consolas"
+                                             FontSize="14"
+                                             IsReadOnly="True"
+                                             AcceptsReturn="True"
+                                             TextWrapping="Wrap"
+                                             VerticalScrollBarVisibility="Auto"
+                                             VerticalContentAlignment="Top"
+                                             Text="{Binding ResponseDetailsText}" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
                     </Border>
+                </Grid>
+            </Grid>
+
+            <Border Grid.Row="4"
+                    Padding="24"
+                    Style="{StaticResource PanelBorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="12" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock FontSize="22"
+                               FontWeight="Bold"
+                               Text="通信日志" />
+                    <ListView Grid.Row="2"
+                              Height="180"
+                              ItemsSource="{Binding FrameLog}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="时间"
+                                                Width="90"
+                                                DisplayMemberBinding="{Binding TimeText}" />
+                                <GridViewColumn Header="方向"
+                                                Width="80"
+                                                DisplayMemberBinding="{Binding Direction}" />
+                                <GridViewColumn Header="帧"
+                                                Width="620"
+                                                DisplayMemberBinding="{Binding FrameText}" />
+                                <GridViewColumn Header="状态"
+                                                Width="260"
+                                                DisplayMemberBinding="{Binding StatusText}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </Border>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

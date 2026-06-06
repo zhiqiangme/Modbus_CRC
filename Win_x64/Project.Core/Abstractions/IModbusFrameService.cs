@@ -8,6 +8,8 @@ public interface IModbusFrameService
 
     FrameImportResult ImportFrame(string? frameText);
 
+    ModbusResponseParseResult ParseResponse(string? frameText);
+
     bool TryParseFieldValue(
         string? input,
         NumberBase numberBase,

@@ -70,8 +70,9 @@ public partial class App : Application
         IAppPreferencesService appPreferencesService = new AppPreferencesService();
         IModbusFrameService modbusFrameService = new ModbusFrameService();
         IClipboardService clipboardService = new WpfClipboardService();
+        IModbusSerialService modbusSerialService = new ModbusSerialService();
 
-        var modbusCrcViewModel = new ModbusCrcViewModel(modbusFrameService, clipboardService);
+        var modbusCrcViewModel = new ModbusCrcViewModel(modbusFrameService, clipboardService, modbusSerialService);
         var mainViewModel = new MainViewModel(appPreferencesService, modbusCrcViewModel);
 
         var mainWindow = new MainWindow(mainViewModel);

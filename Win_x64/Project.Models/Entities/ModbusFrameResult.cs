@@ -4,4 +4,5 @@ public sealed record ModbusFrameResult(
     ModbusFrameInput Input,
     ushort Crc,
     string RawFrameDisplay,
-    string ClipboardFrame);
+    string ClipboardFrame,
+    byte[] FrameBytes);

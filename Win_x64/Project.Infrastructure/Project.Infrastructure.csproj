@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="RJCP.SerialPortStream" Version="3.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Project.Core\Project.Core.csproj" />
     <ProjectReference Include="..\Project.Models\Project.Models.csproj" />
   </ItemGroup>
