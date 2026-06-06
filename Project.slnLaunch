@@ -1,6 +1,6 @@
 [
   {
-    "Name": "Project.UI",
+    "Name": "ModbusFrameTool",
     "Projects": [
       {
         "Path": "Project.UI\\Project.UI.csproj",

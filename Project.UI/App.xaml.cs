@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Windows.Media;
 using Project.Core;
 using Project.Infrastructure;
+using Project.UI.Services;
 using Project.ViewModels;
 using Application = System.Windows.Application;
 using StartupEventArgs = System.Windows.StartupEventArgs;
@@ -67,12 +68,11 @@ public partial class App : Application
         base.OnStartup(e);
 
         IAppPreferencesService appPreferencesService = new AppPreferencesService();
-        ISampleDataService sampleDataService = new SampleDataService();
+        IModbusFrameService modbusFrameService = new ModbusFrameService();
+        IClipboardService clipboardService = new WpfClipboardService();
 
-        var dashboardViewModel = new DashboardViewModel(sampleDataService);
-        var itemsViewModel = new ItemsViewModel(sampleDataService);
-        var settingsViewModel = new SettingsViewModel(appPreferencesService);
-        var mainViewModel = new MainViewModel(dashboardViewModel, itemsViewModel, settingsViewModel);
+        var modbusCrcViewModel = new ModbusCrcViewModel(modbusFrameService, clipboardService);
+        var mainViewModel = new MainViewModel(appPreferencesService, modbusCrcViewModel);
 
         var mainWindow = new MainWindow(mainViewModel);
         MainWindow = mainWindow;

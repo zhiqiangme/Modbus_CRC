@@ -17,7 +17,7 @@ public sealed class AppPreferencesService : IAppPreferencesService
     {
         var directory = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "Project.Template");
+            "ModbusFrameTool");
 
         Directory.CreateDirectory(directory);
         _settingsFilePath = Path.Combine(directory, "app-preferences.json");

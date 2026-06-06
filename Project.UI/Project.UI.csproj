@@ -7,24 +7,25 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <Platforms>x64</Platforms>
-    <AssemblyName>Project</AssemblyName>
+    <AssemblyName>ModbusFrameTool</AssemblyName>
     <RootNamespace>Project.UI</RootNamespace>
-    <Product>Project Template</Product>
-    <Title>Project Template</Title>
-    <ApplicationIcon>Assets\Project.ico</ApplicationIcon>
-    <Description>Reusable WPF MVVM template with layered projects and dependency injection.</Description>
+    <Product>Modbus CRC Tool</Product>
+    <Title>Modbus RTU 原始帧生成器</Title>
+    <ApplicationIcon>Assets\CRC.ico</ApplicationIcon>
+    <Description>Visual Modbus RTU frame CRC calculator and raw-frame generator.</Description>
     <Version>1.0.0</Version>
     <FileVersion>1.0.0</FileVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Project.Core\Project.Core.csproj" />
     <ProjectReference Include="..\Project.Infrastructure\Project.Infrastructure.csproj" />
     <ProjectReference Include="..\Project.ViewModels\Project.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\Project.ico" />
+    <Resource Include="Assets\CRC.ico" />
   </ItemGroup>
 
 </Project>

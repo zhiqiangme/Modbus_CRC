@@ -1,15 +1,8 @@
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Effects;
 using Project.ViewModels;
-using Button = System.Windows.Controls.Button;
-using Brush = System.Windows.Media.Brush;
-using Brushes = System.Windows.Media.Brushes;
-using Color = System.Windows.Media.Color;
 
 namespace Project.UI;
 
@@ -39,65 +32,13 @@ public partial class MainWindow : Window
         catch (Exception exception)
         {
             MessageBox.Show(
-                $"Application startup failed:{Environment.NewLine}{exception.Message}",
-                "Project Template",
+                $"应用启动失败：{Environment.NewLine}{exception.Message}",
+                "Modbus CRC",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }
 
         ApplyCurrentTheme();
-        MainContentTabControl.SelectedIndex = 0;
-        UpdateTabButtonStyles();
-    }
-
-    private void PlaceholderTabButton1_OnClick(object sender, RoutedEventArgs e)
-    {
-        MainContentTabControl.SelectedIndex = 0;
-    }
-
-    private void PlaceholderTabButton2_OnClick(object sender, RoutedEventArgs e)
-    {
-        MainContentTabControl.SelectedIndex = 1;
-    }
-
-    private void MainContentTabControl_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (!ReferenceEquals(sender, MainContentTabControl))
-        {
-            return;
-        }
-
-        UpdateTabButtonStyles();
-    }
-
-    private void UpdateTabButtonStyles()
-    {
-        ApplyTabButtonStyle(PlaceholderTabButton1, MainContentTabControl.SelectedIndex == 0);
-        ApplyTabButtonStyle(PlaceholderTabButton2, MainContentTabControl.SelectedIndex == 1);
-    }
-
-    private static void ApplyTabButtonStyle(Button button, bool isActive)
-    {
-        if (isActive)
-        {
-            button.Background = (Brush)button.FindResource("TabButtonActiveBrush");
-            button.BorderBrush = (Brush)button.FindResource("TabButtonActiveBorderBrush");
-            button.Foreground = (Brush)button.FindResource("TabButtonActiveForegroundBrush");
-            button.Effect = new DropShadowEffect
-            {
-                BlurRadius = 10,
-                ShadowDepth = 1,
-                Opacity = 0.16,
-                Color = Color.FromRgb(15, 23, 42)
-            };
-        }
-        else
-        {
-            button.Background = (Brush)button.FindResource("TitleBarBrush");
-            button.BorderBrush = Brushes.Transparent;
-            button.Foreground = (Brush)button.FindResource("TabButtonInactiveForegroundBrush");
-            button.Effect = null;
-        }
     }
 
     private void ViewModelOnPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -108,7 +49,6 @@ public partial class MainWindow : Window
         }
 
         ApplyCurrentTheme();
-        UpdateTabButtonStyles();
     }
 
     private void MainWindow_Closed(object? sender, EventArgs e)
