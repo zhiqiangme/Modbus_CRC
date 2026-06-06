@@ -1,0 +1,54 @@
+<UserControl x:Class="Project.UI.Views.ItemsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Filterable collection example" Style="{StaticResource H2TextStyle}" VerticalAlignment="Center" />
+
+            <TextBox Grid.Column="1"
+                     Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Grid.Column="3"
+                    Content="Reload"
+                    Command="{Binding RefreshCommand}" />
+        </Grid>
+
+        <Border Grid.Row="2" Style="{StaticResource SurfaceBorderStyle}" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ListView ItemsSource="{Binding FilteredItems}" BorderThickness="0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Title" Width="220" DisplayMemberBinding="{Binding Title}" />
+                            <GridViewColumn Header="Owner" Width="120" DisplayMemberBinding="{Binding Owner}" />
+                            <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding Status}" />
+                            <GridViewColumn Header="Description" Width="420" DisplayMemberBinding="{Binding Description}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Grid.Row="1"
+                           Text="{Binding EmptyStateMessage}"
+                           Style="{StaticResource HintTextStyle}"
+                           Margin="0,16,0,0" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
