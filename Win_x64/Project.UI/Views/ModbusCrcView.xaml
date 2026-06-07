@@ -80,18 +80,17 @@
                         </Grid.RowDefinitions>
 
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="16" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="12" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                            <TextBlock VerticalAlignment="Center"
-                                       FontSize="22"
+                            <TextBlock FontSize="22"
                                        FontWeight="Bold"
                                        Text="请求生成" />
 
-                            <Grid Grid.Column="2">
+                            <Grid Grid.Row="2">
                                 <TextBox Height="42"
                                          Padding="12,0,96,0"
                                          FontFamily="Consolas"
@@ -125,152 +124,152 @@
                             </Grid>
                         </Grid>
 
-                        <Grid Grid.Row="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="18" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="16" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="16" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="16" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="18" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <StackPanel>
-                                <TextBlock Text="从站地址" Style="{StaticResource LabelTextStyle}" />
-                                <Grid Margin="0,8,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="54" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button Height="42"
-                                            Padding="0"
-                                            Style="{StaticResource SecondaryButtonStyle}"
-                                            FontFamily="Consolas"
-                                            FontSize="18"
-                                            FontWeight="SemiBold"
-                                            Content="{Binding SlaveAddressBaseText}"
-                                            Command="{Binding ToggleSlaveAddressBaseCommand}" />
-                                    <TextBox Grid.Column="1"
-                                             Height="42"
-                                             FontSize="18"
-                                             VerticalContentAlignment="Center"
-                                             ToolTip="1 字节，例如 0A"
-                                             Text="{Binding SlaveAddressText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <StackPanel>
+                                    <TextBlock Text="从站地址" Style="{StaticResource LabelTextStyle}" />
+                                    <Grid Margin="0,8,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="54" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Button Height="42"
+                                                Padding="0"
+                                                Style="{StaticResource SecondaryButtonStyle}"
+                                                FontFamily="Consolas"
+                                                FontSize="18"
+                                                FontWeight="SemiBold"
+                                                Content="{Binding SlaveAddressBaseText}"
+                                                Command="{Binding ToggleSlaveAddressBaseCommand}" />
+                                        <TextBox Grid.Column="1"
+                                                 Height="42"
+                                                 FontSize="18"
+                                                 VerticalContentAlignment="Center"
+                                                 ToolTip="1 字节，例如 0A"
+                                                 Text="{Binding SlaveAddressText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    </Grid>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="功能码" Style="{StaticResource LabelTextStyle}" />
+                                    <ComboBox Height="42"
+                                              Margin="0,8,0,0"
+                                              FontSize="16"
+                                              DisplayMemberPath="DisplayName"
+                                              ItemsSource="{Binding FunctionOptions}"
+                                              SelectedItem="{Binding SelectedFunctionOption, Mode=TwoWay}" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Margin="0,16,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="18" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel>
+                                    <TextBlock Text="{Binding AddressFieldLabel}" Style="{StaticResource LabelTextStyle}" />
+                                    <Grid Margin="0,8,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="54" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Button Height="42"
+                                                Padding="0"
+                                                Style="{StaticResource SecondaryButtonStyle}"
+                                                FontFamily="Consolas"
+                                                FontSize="18"
+                                                FontWeight="SemiBold"
+                                                Content="{Binding RegisterAddressBaseText}"
+                                                Command="{Binding ToggleRegisterAddressBaseCommand}" />
+                                        <TextBox Grid.Column="1"
+                                                 Height="42"
+                                                 FontSize="18"
+                                                 VerticalContentAlignment="Center"
+                                                 ToolTip="2 字节，例如 0030"
+                                                 Text="{Binding RegisterAddressText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    </Grid>
+                                </StackPanel>
+
+                                <Grid Grid.Column="2">
+                                    <StackPanel>
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsQuantityFieldVisible}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+                                        <TextBlock Text="{Binding QuantityFieldLabel}" Style="{StaticResource LabelTextStyle}" />
+                                        <Grid Margin="0,8,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="54" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Height="42"
+                                                    Padding="0"
+                                                    Style="{StaticResource SecondaryButtonStyle}"
+                                                    FontFamily="Consolas"
+                                                    FontSize="18"
+                                                    FontWeight="SemiBold"
+                                                    Content="{Binding QuantityBaseText}"
+                                                    Command="{Binding ToggleQuantityBaseCommand}" />
+                                            <TextBox Grid.Column="1"
+                                                     Height="42"
+                                                     FontSize="18"
+                                                     VerticalContentAlignment="Center"
+                                                     ToolTip="{Binding QuantityFieldHint}"
+                                                     Text="{Binding QuantityText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <StackPanel>
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsDataFieldVisible}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+                                        <TextBlock Text="{Binding DataFieldLabel}" Style="{StaticResource LabelTextStyle}" />
+                                        <Grid Margin="0,8,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="54" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Button Height="42"
+                                                    Padding="0"
+                                                    Style="{StaticResource SecondaryButtonStyle}"
+                                                    FontFamily="Consolas"
+                                                    FontSize="18"
+                                                    FontWeight="SemiBold"
+                                                    Content="{Binding DataBaseText}"
+                                                    Command="{Binding ToggleDataBaseCommand}" />
+                                            <TextBox Grid.Column="1"
+                                                     Height="42"
+                                                     FontSize="18"
+                                                     VerticalContentAlignment="Center"
+                                                     ToolTip="{Binding DataFieldHint}"
+                                                     Text="{Binding DataText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </Grid>
+                                    </StackPanel>
                                 </Grid>
-                            </StackPanel>
+                            </Grid>
 
-                            <StackPanel Grid.Column="2">
-                                <TextBlock Text="功能码" Style="{StaticResource LabelTextStyle}" />
-                                <ComboBox Height="42"
-                                          Margin="0,8,0,0"
-                                          FontSize="16"
-                                          DisplayMemberPath="DisplayName"
-                                          ItemsSource="{Binding FunctionOptions}"
-                                          SelectedItem="{Binding SelectedFunctionOption, Mode=TwoWay}" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="2">
-                                <TextBlock Text="{Binding AddressFieldLabel}" Style="{StaticResource LabelTextStyle}" />
-                                <Grid Margin="0,8,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="54" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button Height="42"
-                                            Padding="0"
-                                            Style="{StaticResource SecondaryButtonStyle}"
-                                            FontFamily="Consolas"
-                                            FontSize="18"
-                                            FontWeight="SemiBold"
-                                            Content="{Binding RegisterAddressBaseText}"
-                                            Command="{Binding ToggleRegisterAddressBaseCommand}" />
-                                    <TextBox Grid.Column="1"
-                                             Height="42"
-                                             FontSize="18"
-                                             VerticalContentAlignment="Center"
-                                             ToolTip="2 字节，例如 0030"
-                                             Text="{Binding RegisterAddressText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </Grid>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="2"
-                                        Grid.Column="2">
-                                <StackPanel.Style>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsQuantityFieldVisible}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                                <TextBlock Text="{Binding QuantityFieldLabel}" Style="{StaticResource LabelTextStyle}" />
-                                <Grid Margin="0,8,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="54" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button Height="42"
-                                            Padding="0"
-                                            Style="{StaticResource SecondaryButtonStyle}"
-                                            FontFamily="Consolas"
-                                            FontSize="18"
-                                            FontWeight="SemiBold"
-                                            Content="{Binding QuantityBaseText}"
-                                            Command="{Binding ToggleQuantityBaseCommand}" />
-                                    <TextBox Grid.Column="1"
-                                             Height="42"
-                                             FontSize="18"
-                                             VerticalContentAlignment="Center"
-                                             ToolTip="{Binding QuantityFieldHint}"
-                                             Text="{Binding QuantityText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </Grid>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="4"
-                                        Grid.Column="2">
-                                <StackPanel.Style>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsDataFieldVisible}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
-                                <TextBlock Text="{Binding DataFieldLabel}" Style="{StaticResource LabelTextStyle}" />
-                                <Grid Margin="0,8,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="54" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button Height="42"
-                                            Padding="0"
-                                            Style="{StaticResource SecondaryButtonStyle}"
-                                            FontFamily="Consolas"
-                                            FontSize="18"
-                                            FontWeight="SemiBold"
-                                            Content="{Binding DataBaseText}"
-                                            Command="{Binding ToggleDataBaseCommand}" />
-                                    <TextBox Grid.Column="1"
-                                             Height="42"
-                                             FontSize="18"
-                                             VerticalContentAlignment="Center"
-                                             ToolTip="{Binding DataFieldHint}"
-                                             Text="{Binding DataText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </Grid>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="4"
-                                        Grid.ColumnSpan="3">
+                            <StackPanel Margin="0,16,0,0">
                                 <StackPanel.Style>
                                     <Style TargetType="StackPanel">
                                         <Setter Property="Visibility" Value="Collapsed" />
@@ -297,11 +296,10 @@
                                            Text="{Binding ValuesFieldHint}" />
                             </StackPanel>
 
-                            <TextBlock Grid.Row="6"
-                                       Grid.ColumnSpan="3"
+                            <TextBlock Margin="0,16,0,0"
                                        Style="{StaticResource HintTextStyle}"
                                        Text="支持功能码 01/02/03/04/05/06/0F/10，切换后会按请求类型显示相关字段。" />
-                        </Grid>
+                        </StackPanel>
 
                         <StackPanel Grid.Row="4"
                                     Orientation="Horizontal">
