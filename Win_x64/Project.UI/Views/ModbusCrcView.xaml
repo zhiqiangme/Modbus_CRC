@@ -316,35 +316,28 @@
                                     Padding="18"
                                     Style="{StaticResource SurfaceBorderStyle}">
                                 <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="12" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="72" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="16" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock VerticalAlignment="Center"
-                                               FontWeight="SemiBold"
-                                               Text="原始帧" />
-                                    <TextBlock Grid.Column="1"
+                                               HorizontalAlignment="Left"
                                                FontFamily="Consolas"
                                                FontSize="20"
-                                               TextWrapping="Wrap"
+                                               TextTrimming="CharacterEllipsis"
                                                Text="{Binding RawFrameText, Mode=OneWay}" />
 
-                                    <TextBlock Grid.Row="2"
+                                    <TextBlock Grid.Column="2"
+                                               HorizontalAlignment="Right"
                                                VerticalAlignment="Center"
-                                               FontWeight="SemiBold"
-                                               Text="CRC" />
-                                    <TextBlock Grid.Row="2"
-                                               Grid.Column="1"
                                                FontFamily="Consolas"
                                                FontSize="20"
-                                               FontWeight="SemiBold"
-                                               Text="{Binding CrcText}" />
+                                               FontWeight="SemiBold">
+                                        <Run Text="CRC " />
+                                        <Run Text="{Binding CrcText, Mode=OneWay}" />
+                                    </TextBlock>
                                 </Grid>
                             </Border>
                         </Grid>
