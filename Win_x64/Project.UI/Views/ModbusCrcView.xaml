@@ -13,63 +13,24 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="16" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="16" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Border Padding="24"
-                    CornerRadius="18"
-                    Background="#0F172A">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel>
-                        <TextBlock FontSize="14"
-                                   Foreground="#93C5FD"
-                                   FontWeight="SemiBold"
-                                   Text="Modbus RTU 调试" />
-                        <TextBlock Margin="0,10,0,0"
-                                   FontSize="28"
-                                   FontWeight="Bold"
-                                   Foreground="White"
-                                   Text="原始帧生成、发送与解析" />
-                        <TextBlock Margin="0,10,0,0"
-                                   FontSize="14"
-                                   Foreground="#CBD5E1"
-                                   Text="按功能码生成 RTU 请求帧，支持复制、串口发送和响应解析。" />
-                    </StackPanel>
-
-                    <Border Grid.Column="1"
-                            Padding="16,10"
-                            CornerRadius="12"
-                            Background="#1E293B">
-                        <StackPanel>
-                            <TextBlock FontSize="12"
-                                       Foreground="#94A3B8"
-                                       Text="当前状态" />
-                            <TextBlock Margin="0,4,0,0"
-                                       FontSize="18"
-                                       FontWeight="SemiBold"
-                                       Foreground="#F8FAFC"
-                                       Text="{Binding HeaderStatusText}" />
-                        </StackPanel>
-                    </Border>
-                </Grid>
-            </Border>
-
-            <Grid Grid.Row="2">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.03*" />
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="0.97*" />
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0"
-                        Padding="24"
-                        Style="{StaticResource PanelBorderStyle}">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Border Padding="24"
+                            Style="{StaticResource PanelBorderStyle}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -321,18 +282,11 @@
                                     Click="RecycleBinButton_OnClick" />
                         </StackPanel>
                     </Grid>
-                </Border>
 
-                <Grid Grid.Column="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="16" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+                    </Border>
 
-                    <Border Padding="24"
+                    <Border Grid.Row="2"
+                            Padding="24"
                             Style="{StaticResource PanelBorderStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -412,9 +366,16 @@
                             </Border>
                         </Grid>
                     </Border>
+                </Grid>
 
-                    <Border Grid.Row="2"
-                            Padding="24"
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Border Padding="24"
                             Style="{StaticResource PanelBorderStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -497,7 +458,7 @@
                         </Grid>
                     </Border>
 
-                    <Border Grid.Row="4"
+                    <Border Grid.Row="2"
                             Padding="24"
                             Style="{StaticResource PanelBorderStyle}">
                         <Grid>
@@ -566,7 +527,7 @@
                 </Grid>
             </Grid>
 
-            <Border Grid.Row="4"
+            <Border Grid.Row="2"
                     Padding="24"
                     Style="{StaticResource PanelBorderStyle}">
                 <Grid>
