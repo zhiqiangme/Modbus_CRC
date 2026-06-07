@@ -296,9 +296,7 @@
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="Center"
-                                          Content="{TemplateBinding Content}"
-                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                          ContentSource="Content" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsHighlighted" Value="True">
