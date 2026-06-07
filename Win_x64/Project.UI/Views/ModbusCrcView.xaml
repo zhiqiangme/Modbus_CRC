@@ -560,7 +560,7 @@
                                              TextWrapping="Wrap"
                                              VerticalScrollBarVisibility="Auto"
                                              VerticalContentAlignment="Top"
-                                             Text="{Binding ResponseDetailsText}" />
+                                             Text="{Binding ResponseDetailsText, Mode=OneWay}" />
                                 </StackPanel>
                             </Border>
                         </Grid>
