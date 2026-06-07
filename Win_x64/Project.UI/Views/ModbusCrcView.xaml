@@ -439,9 +439,12 @@
                                         Style="{StaticResource SecondaryButtonStyle}"
                                         Content="刷新串口"
                                         Command="{Binding RefreshSerialPortsCommand}" />
-                                <TextBlock Margin="14,9,0,0"
+                                <TextBlock Margin="14,4,0,0"
+                                           FontSize="12"
+                                           LineHeight="15"
+                                           LineStackingStrategy="BlockLineHeight"
                                            Style="{StaticResource HintTextStyle}"
-                                           Text="端口 / 波特率 / 数据位 / 校验 / 停止位 / 超时 ms" />
+                                           Text="端口 / 波特率 / 数据位&#x0a;校验 / 停止位 / 超时 ms" />
                             </StackPanel>
                         </Grid>
                     </Border>

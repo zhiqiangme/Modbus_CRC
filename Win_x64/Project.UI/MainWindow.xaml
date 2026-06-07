@@ -11,7 +11,7 @@
         WindowStyle="None"
         AllowsTransparency="False"
         ResizeMode="CanResize"
-        Height="950"
+        Height="1020"
         Width="1240"
         MinHeight="760"
         MinWidth="1080"
