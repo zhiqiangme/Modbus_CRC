@@ -15,8 +15,24 @@ public partial class ModbusCrcView : UserControl
 
     private void FrameImportTextBox_OnPreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
     {
+        if (ShouldOpenNativeContextMenu())
+        {
+            return;
+        }
+
         e.Handled = true;
         ExecuteViewModelCommand(static viewModel => viewModel.ImportFromClipboardCommand);
+    }
+
+    private void ResponseImportTextBox_OnPreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        if (ShouldOpenNativeContextMenu())
+        {
+            return;
+        }
+
+        e.Handled = true;
+        ExecuteViewModelCommand(static viewModel => viewModel.ImportResponseFromClipboardCommand);
     }
 
     private void FrameImportTextBox_OnKeyDown(object sender, KeyEventArgs e)
@@ -82,5 +98,16 @@ public partial class ModbusCrcView : UserControl
             // UI 事件只转发命令，业务逻辑保留在 ViewModel。
             command.Execute(null);
         }
+    }
+
+    private static bool ShouldOpenNativeContextMenu()
+    {
+        const ModifierKeys supportedModifiers = ModifierKeys.Control
+            | ModifierKeys.Shift
+            | ModifierKeys.Alt
+            | ModifierKeys.Windows;
+
+        // Fn 键通常不会被 Windows/WPF 当作普通修饰键上报。
+        return (Keyboard.Modifiers & supportedModifiers) != ModifierKeys.None;
     }
 }

@@ -71,6 +71,7 @@ public sealed class ModbusCrcViewModel : ObservableObject
         FillExampleCommand = new RelayCommand(FillExample);
         ImportFromClipboardCommand = new RelayCommand(ImportFrameFromClipboard);
         ImportFrameTextCommand = new RelayCommand(ImportFrameFromTextBox);
+        ImportResponseFromClipboardCommand = new RelayCommand(ImportResponseFromClipboard);
         ParseResponseCommand = new RelayCommand(ParseResponseFromTextBox);
         RefreshSerialPortsCommand = new RelayCommand(RefreshSerialPorts);
         SendCurrentFrameCommand = new AsyncRelayCommand(SendCurrentFrameAsync);
@@ -90,6 +91,8 @@ public sealed class ModbusCrcViewModel : ObservableObject
     public RelayCommand ImportFromClipboardCommand { get; }
 
     public RelayCommand ImportFrameTextCommand { get; }
+
+    public RelayCommand ImportResponseFromClipboardCommand { get; }
 
     public RelayCommand ParseResponseCommand { get; }
 
@@ -476,6 +479,35 @@ public sealed class ModbusCrcViewModel : ObservableObject
             return;
         }
 
+        ParseResponseCore(inputText);
+    }
+
+    private void ImportResponseFromClipboard()
+    {
+        string clipboardText;
+        try
+        {
+            clipboardText = _clipboardService.ContainsText() ? _clipboardService.GetText() : string.Empty;
+        }
+        catch (Exception exception)
+        {
+            ResponseSummaryText = $"读取剪贴板失败：{exception.Message}";
+            ResponseDetailsText = string.Empty;
+            ResponseCrcStatusText = "--";
+            return;
+        }
+
+        ResponseImportText = clipboardText;
+        string inputText = ResponseImportText.Trim();
+        if (string.IsNullOrWhiteSpace(inputText))
+        {
+            ResponseSummaryText = "剪贴板为空，无法导入响应帧。";
+            ResponseDetailsText = string.Empty;
+            ResponseCrcStatusText = "--";
+            return;
+        }
+
+        // 右键粘贴响应帧后直接解析，减少一次按钮操作。
         ParseResponseCore(inputText);
     }
 

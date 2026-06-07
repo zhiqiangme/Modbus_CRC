@@ -57,7 +57,7 @@
                                          FontFamily="Consolas"
                                          FontSize="18"
                                          VerticalContentAlignment="Center"
-                                         ToolTip="粘贴完整请求帧后按 Enter 导入；右键从剪贴板导入并纠正 CRC"
+                                         ToolTip="粘贴完整请求帧后按 Enter 导入；右键从剪贴板导入并纠正 CRC；按住 Ctrl/Shift/Alt 右键显示菜单"
                                          Text="{Binding FrameImportText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          KeyDown="FrameImportTextBox_OnKeyDown"
                                          PreviewMouseRightButtonUp="FrameImportTextBox_OnPreviewMouseRightButtonUp" />
@@ -489,7 +489,9 @@
                                 <TextBox Height="42"
                                          FontFamily="Consolas"
                                          FontSize="17"
-                                         Text="{Binding ResponseImportText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                         ToolTip="右键从剪贴板导入并解析响应帧；按住 Ctrl/Shift/Alt 右键显示菜单"
+                                         Text="{Binding ResponseImportText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         PreviewMouseRightButtonUp="ResponseImportTextBox_OnPreviewMouseRightButtonUp" />
                                 <Button Grid.Column="2"
                                         Width="96"
                                         Height="42"
