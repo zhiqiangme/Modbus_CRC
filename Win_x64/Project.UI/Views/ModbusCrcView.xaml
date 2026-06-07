@@ -296,74 +296,53 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="12" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="12" />
-                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock FontSize="22"
-                                       FontWeight="Bold"
-                                       Text="生成结果" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="22"
+                                           FontWeight="Bold"
+                                           Text="生成结果" />
+                                <TextBlock Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
+                                           Foreground="#0F766E"
+                                           Text="{Binding CopyStatusText}" />
+                            </Grid>
 
                             <Border Grid.Row="2"
                                     Padding="16"
                                     CornerRadius="14"
                                     Background="#0F172A">
-                                <StackPanel>
-                                    <TextBlock FontSize="12"
-                                               Foreground="#93C5FD"
-                                               Text="原始帧" />
-                                    <TextBox Margin="0,8,0,0"
-                                             Height="72"
-                                             Padding="0"
-                                             Background="#0F172A"
-                                             Foreground="White"
-                                             BorderThickness="0"
-                                             FontFamily="Consolas"
-                                             FontSize="21"
-                                             IsReadOnly="True"
-                                             TextWrapping="Wrap"
-                                             VerticalContentAlignment="Top"
-                                             Text="{Binding RawFrameText, Mode=OneWay}" />
-                                </StackPanel>
+                                <TextBox Height="72"
+                                         Padding="0"
+                                         Background="#0F172A"
+                                         Foreground="White"
+                                         BorderThickness="0"
+                                         FontFamily="Consolas"
+                                         FontSize="21"
+                                         IsReadOnly="True"
+                                         TextWrapping="Wrap"
+                                         VerticalContentAlignment="Top"
+                                         Text="{Binding RawFrameText, Mode=OneWay}" />
                             </Border>
 
-                            <UniformGrid Grid.Row="4"
-                                         Columns="2">
-                                <Border Margin="0,0,8,0"
-                                        Padding="14"
-                                        Style="{StaticResource SurfaceBorderStyle}">
-                                    <StackPanel>
-                                        <TextBlock Style="{StaticResource HintTextStyle}"
-                                                   Text="CRC16" />
-                                        <TextBlock Margin="0,6,0,0"
-                                                   FontFamily="Consolas"
-                                                   FontSize="23"
-                                                   FontWeight="SemiBold"
-                                                   Text="{Binding CrcText}" />
-                                    </StackPanel>
-                                </Border>
-
-                                <Border Margin="8,0,0,0"
-                                        Padding="14"
-                                        Style="{StaticResource SurfaceBorderStyle}">
-                                    <StackPanel>
-                                        <TextBlock Style="{StaticResource HintTextStyle}"
-                                                   Text="复制状态" />
-                                        <TextBlock Margin="0,6,0,0"
-                                                   FontSize="19"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="#0F766E"
-                                                   Text="{Binding CopyStatusText}" />
-                                    </StackPanel>
-                                </Border>
-                            </UniformGrid>
-
-                            <Border Grid.Row="6"
+                            <Border Grid.Row="4"
                                     Padding="14"
                                     Style="{StaticResource SurfaceBorderStyle}">
-                                <TextBlock Style="{StaticResource HintTextStyle}"
-                                           TextWrapping="Wrap"
-                                           Text="{Binding NextStepText}" />
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource HintTextStyle}"
+                                               Text="CRC16" />
+                                    <TextBlock Margin="0,6,0,0"
+                                               FontFamily="Consolas"
+                                               FontSize="23"
+                                               FontWeight="SemiBold"
+                                               Text="{Binding CrcText}" />
+                                </StackPanel>
                             </Border>
                         </Grid>
                     </Border>
