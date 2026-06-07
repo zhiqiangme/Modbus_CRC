@@ -124,7 +124,8 @@
                                               FontSize="16"
                                               DisplayMemberPath="DisplayName"
                                               ItemsSource="{Binding FunctionOptions}"
-                                              SelectedItem="{Binding SelectedFunctionOption, Mode=TwoWay}" />
+                                              SelectedItem="{Binding SelectedFunctionOption, Mode=TwoWay}"
+                                              TextSearch.TextPath="DisplayName" />
                                 </StackPanel>
                             </Grid>
 
@@ -417,9 +418,21 @@
                                 <ComboBox Height="38"
                                           ItemsSource="{Binding SerialPortNames}"
                                           SelectedItem="{Binding SelectedSerialPortName, Mode=TwoWay}" />
-                                <TextBox Grid.Column="2"
-                                         Height="38"
-                                         Text="{Binding BaudRateText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <ComboBox Grid.Column="2"
+                                          Height="38"
+                                          IsEditable="True"
+                                          IsTextSearchEnabled="False"
+                                          StaysOpenOnEdit="True"
+                                          Text="{Binding BaudRateText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBoxItem Content="9600" />
+                                    <ComboBoxItem Content="19200" />
+                                    <ComboBoxItem Content="38400" />
+                                    <ComboBoxItem Content="57600" />
+                                    <ComboBoxItem Content="115200" />
+                                    <ComboBoxItem Content="230400" />
+                                    <ComboBoxItem Content="460800" />
+                                    <ComboBoxItem Content="921600" />
+                                </ComboBox>
                                 <TextBox Grid.Column="4"
                                          Height="38"
                                          Text="{Binding DataBitsText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
