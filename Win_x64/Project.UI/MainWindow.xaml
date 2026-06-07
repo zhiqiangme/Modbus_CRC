@@ -97,7 +97,7 @@
                                                 <ControlTemplate TargetType="Button">
                                                     <Border x:Name="border"
                                                             Background="{TemplateBinding Background}"
-                                                            CornerRadius="0"
+                                                            CornerRadius="8"
                                                             UseLayoutRounding="True"
                                                             SnapsToDevicePixels="True">
                                                         <TextBlock x:Name="themeIcon"
@@ -137,7 +137,7 @@
                                                 <ControlTemplate TargetType="Button">
                                                     <Border x:Name="border"
                                                             Background="{TemplateBinding Background}"
-                                                            CornerRadius="0"
+                                                            CornerRadius="8"
                                                             UseLayoutRounding="True"
                                                             SnapsToDevicePixels="True">
                                                         <TextBlock x:Name="minimizeIcon"
@@ -177,7 +177,7 @@
                                                 <ControlTemplate TargetType="Button">
                                                     <Border x:Name="border"
                                                             Background="{TemplateBinding Background}"
-                                                            CornerRadius="0"
+                                                            CornerRadius="8"
                                                             UseLayoutRounding="True"
                                                             SnapsToDevicePixels="True">
                                                         <TextBlock x:Name="closeIcon"
