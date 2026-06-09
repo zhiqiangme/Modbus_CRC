@@ -56,6 +56,9 @@ public sealed class MainViewModel : ObservableObject
             ? "Modbus RTU 原始帧生成器"
             : _preferences.AppTitle;
         IsDarkMode = _preferences.IsDarkMode;
+
+        // 初始化 ViewModel 的默认值和串口列表。
+        ModbusCrcViewModel.Initialize();
     }
 
     private async Task ToggleThemeAsync()

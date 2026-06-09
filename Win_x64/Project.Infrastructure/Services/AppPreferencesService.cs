@@ -30,9 +30,22 @@ public sealed class AppPreferencesService : IAppPreferencesService
             return new AppPreferences();
         }
 
-        await using var stream = File.OpenRead(_settingsFilePath);
-        var preferences = await JsonSerializer.DeserializeAsync<AppPreferences>(stream, JsonOptions, cancellationToken);
-        return preferences ?? new AppPreferences();
+        try
+        {
+            await using var stream = File.OpenRead(_settingsFilePath);
+            var preferences = await JsonSerializer.DeserializeAsync<AppPreferences>(stream, JsonOptions, cancellationToken);
+            return preferences ?? new AppPreferences();
+        }
+        catch (JsonException)
+        {
+            // JSON 文件损坏时返回默认配置，避免应用启动失败。
+            return new AppPreferences();
+        }
+        catch (IOException)
+        {
+            // 文件读取失败时返回默认配置。
+            return new AppPreferences();
+        }
     }
 
     public async Task SaveAsync(AppPreferences preferences, CancellationToken cancellationToken = default)

@@ -49,13 +49,14 @@ public sealed class ModbusSerialService : IModbusSerialService
             serialPort.Write(requestBytes, 0, requestBytes.Length);
             serialPort.Flush();
 
-            byte[] buffer = new byte[256];
+            byte[] buffer = new byte[512];
             var response = new List<byte>();
             int timeout = Math.Max(100, settings.TimeoutMilliseconds);
 
             // 收到首批响应后，再等待一个短读周期，避免过早截断慢速串口帧。
             while (stopwatch.ElapsedMilliseconds < timeout)
             {
+                // 每次循环都检查取消令牌，确保及时响应取消请求。
                 cancellationToken.ThrowIfCancellationRequested();
 
                 try

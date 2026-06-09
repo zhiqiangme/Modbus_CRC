@@ -79,7 +79,13 @@ public sealed class ModbusCrcViewModel : ObservableObject
         ToggleRegisterAddressBaseCommand = new RelayCommand(() => ToggleFieldBase(FrameFieldKey.RegisterAddress));
         ToggleQuantityBaseCommand = new RelayCommand(() => ToggleFieldBase(FrameFieldKey.Quantity));
         ToggleDataBaseCommand = new RelayCommand(() => ToggleFieldBase(FrameFieldKey.Data));
+    }
 
+    /// <summary>
+    /// 初始化默认值和串口列表，应在构造函数之后调用。
+    /// </summary>
+    public void Initialize()
+    {
         FillExample();
         RefreshSerialPorts();
     }
@@ -1150,6 +1156,7 @@ public sealed class ModbusCrcViewModel : ObservableObject
         }
 
         string cleaned = singleToken.StartsWith("0x", StringComparison.OrdinalIgnoreCase) ? singleToken[2..] : singleToken;
+        // 支持连续十六进制字符串按4位分割，长度必须是4的倍数。
         if (!isCoilList && cleaned.Length > 4 && cleaned.Length % 4 == 0 && cleaned.All(Uri.IsHexDigit))
         {
             return Enumerable.Range(0, cleaned.Length / 4)

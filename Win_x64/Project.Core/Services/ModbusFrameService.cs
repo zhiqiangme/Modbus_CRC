@@ -11,7 +11,8 @@ public sealed class ModbusFrameService : IModbusFrameService
         ushort crc = ComputeModbusCrc(frameWithoutCrc);
         byte[] frame = AppendCrc(frameWithoutCrc, crc);
         string rawFrame = FormatFrame(frame);
-        string clipboardFrame = string.Concat(frame.Select(static b => b.ToString("X2", CultureInfo.InvariantCulture)));
+        // 剪贴板帧使用空格分隔，提高可读性。
+        string clipboardFrame = string.Join(" ", frame.Select(static b => b.ToString("X2", CultureInfo.InvariantCulture)));
 
         return new ModbusFrameResult(input, crc, rawFrame, clipboardFrame, frame);
     }
